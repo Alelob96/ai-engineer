@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Engineer"
+  short_description: "Design and review reliable AI agents and RAG"
+  default_prompt: "Use $ai-engineer to design and review a bounded, secure Python AI agent with tools and observability."

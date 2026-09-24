@@ -1,0 +1,9 @@
+# Tool and MCP engineering
+
+Define a tool by its single capability and disallowed scope. Specify typed input and output (Pydantic where useful), size and value constraints, principal and tenant derivation, timeout, result cap, rate limit, retries, read/write semantics, idempotency key for writes, approval, audit event, and sanitized error codes. Derive tenant and ownership from authenticated application context rather than model-generated arguments. Validate both inputs and external outputs at the boundary.
+
+Prefer narrow operations such as `lookup_invoice(invoice_id)` to `execute_sql(query)` or arbitrary shell/URL fetch. Do not trust a `tenant_id` or authorization flag proposed by a model. Tool errors returned to the model should identify a fixable condition without stack traces, internal URLs, tokens, or database detail. Internal logs may carry a restricted exception ID and traceback. Bound output size to prevent context and cost explosions.
+
+A useful result shape is `{ok, data, error_code, error_message, metadata}` with a strongly typed `data` per tool and a fresh metadata default factory. Do not leak raw exceptions through that envelope. Tool descriptions should explain how to use the capability and when not to call it.
+
+For MCP, choose a tool for an operation, a resource for readable context, and a prompt only where the client needs a reusable prompt. Set clear server ownership, transport, authn/authz, per-tool scopes, tenancy, pagination, timeouts, replay and rate limits. Treat every third-party MCP server as an external trust boundary. Require explicit approval for consequential writes, audit denied and successful writes, and separate discovery of offered tools from permission to execute them. Consult current MCP and chosen SDK documentation for exact transport and APIs.
