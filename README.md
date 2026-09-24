@@ -21,10 +21,10 @@ The `SKILL.md` is the entry point. References are read only when relevant. This 
 From the published GitHub repository:
 
 ```bash
-npx skills add OWNER/ai-engineer --skill ai-engineer
+npx skills add Alelob96/ai-engineer --skill ai-engineer
 ```
 
-Replace `OWNER` with the GitHub account or organization that publishes this repository. To install locally from the parent directory:
+To install locally from the parent directory:
 
 ```bash
 npx skills add ./ai-engineer --skill ai-engineer
